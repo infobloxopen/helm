@@ -2,7 +2,7 @@ FROM alpine/helm:VERSION
 ARG AWS_REGION
 ARG AWS_ACCESS_KEY_ID
 ARG AWS_SECRET_ACCESS_KEY
-
+ENV HOME /tmp
 RUN helm init -c && \
     apk add --update --no-cache git bash && \
     helm plugin install https://github.com/hypnoglow/helm-s3.git && \
