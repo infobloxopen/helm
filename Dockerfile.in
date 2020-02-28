@@ -8,3 +8,10 @@ RUN helm init -c && \
     helm plugin install https://github.com/hypnoglow/helm-s3.git && \
     rm -f /var/cache/apk/*
 RUN helm repo add infobloxcto s3://infoblox-helm-dev/charts
+FROM alpine/helm:VERSION
+COPY --from=0 /tmp /tmp/
+RUN find /tmp
+RUN helm init -c && \
+    apk add --update --no-cache git bash && \
+    helm plugin install https://github.com/hypnoglow/helm-s3.git && \
+    rm -f /var/cache/apk/*
