@@ -1,6 +1,13 @@
 FROM alpine/helm:VERSION
 ENV HOME /tmp
+ADD entrypoint.sh /entrypoint.sh
+
+#FIXME: add versioning to helm-s3
+
 RUN helm init -c && \
     apk add --update --no-cache git bash && \
     helm plugin install https://github.com/hypnoglow/helm-s3.git && \
-    rm -f /var/cache/apk/*
+    rm -f /var/cache/apk/* && \
+    ln -s /usr/bin/helm /usr/bin/helmnoaws
+
+ENTRYPOINT ["/entrypoint.sh"]
