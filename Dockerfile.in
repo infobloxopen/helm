@@ -10,4 +10,5 @@ RUN helm init -c && \
     rm -f /var/cache/apk/* && \
     ln -s /usr/bin/helm /usr/bin/helmnoaws
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh", "helm"]
+CMD ["--help"]
