@@ -1,6 +1,5 @@
 FROM alpine/helm:VERSION
 ENV HOME /tmp
-ADD entrypoint.sh /entrypoint.sh
 
 #FIXME: add versioning to helm-s3
 
@@ -9,6 +8,12 @@ RUN helm init -c && \
     helm plugin install https://github.com/hypnoglow/helm-s3.git && \
     rm -f /var/cache/apk/* && \
     ln -s /usr/bin/helm /usr/bin/helmnoaws
+
+# Fake a repo when entrypoint is overridden
+ADD repositories.yaml $HELM_HOME/repository/repositories.yaml
+ADD cache.yaml $HELM_HOME/repository/cache/infobloxcto-index.yaml
+
+ADD entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh", "helm"]
 CMD ["--help"]
