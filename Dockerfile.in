@@ -1,11 +1,13 @@
 FROM alpine/helm:VERSION
 ENV HOME /tmp
 
+#Install yq and jq dependencies
 #FIXME: add versioning to helm-s3
-
-RUN helm init -c && \
-    apk add --update --no-cache git bash && \
+RUN apk add --update --no-cache git bash && \
+    apk add py-pip jq && \
+    pip install yq && \
     helm plugin install https://github.com/hypnoglow/helm-s3.git && \
+    helm plugin install https://github.com/chartmuseum/helm-push.git && \
     rm -f /var/cache/apk/* && \
     ln -s /usr/bin/helm /usr/bin/helmnoaws
 
