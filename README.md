@@ -1,4 +1,4 @@
-** Helm2 Users
+## Helm2 Users
 
 Helm2 was EOL in 2020. The stable repo bucket used by default in helm2 has also been deleted from Google. You will need to switch to the helm3 image or customize your helm2 deployments to avoid `helm repo` commands. The following error is encountered when helm2 attempts to sync helm repositories.
 
