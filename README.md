@@ -15,8 +15,8 @@ Recommended way to execute this container
     -e AWS_SECRET_ACCESS_KEY \
     -e AWS_ACCESS_KEY_ID \
     -e AWS_SESSION_TOKEN \
-    infoblox/helm:2.14.3-1e1c033 version --client
-    Client: &version.Version{SemVer:"v2.14.3", GitCommit:"0e7f3b6637f7af8fcfddb3d2941fcc7cbebb0085", GitTreeState:"clean"}
+    infoblox/helm:3.2.4-5b243a2 version --client
+    version.BuildInfo{Version:"v3.2.4", GitCommit:"0ad800ef43d3b826f31a5ad8dfbb4fe05d143688", GitTreeState:"clean", GoVersion:"go1.13.12"}
 
 
 Note:`AWS_SESSION_TOKEN` is needed if MFA is used for AWS authentication.
