@@ -22,8 +22,8 @@ pipeline {
       when { anyOf { branch "master", branch "helm3" } }
       steps {
         // reference Jenkins credential ids via an environment variable
-        withDockerRegistry([credentialsId: "${env.JENKINS_DOCKER_CRED_ID}", url: ""]) {
-             sh "make docker-push"
+         withDockerRegistry([credentialsId: "${env.JENKINS_DOCKER_CRED_ID}", url: ""]) {
+         sh "make docker-push"
         }
       }
     }
@@ -31,10 +31,10 @@ pipeline {
   post {
     success {
       // finalizeBuild is one of the Secure CICD helper methods
-          finalizeBuild()
+      finalizeBuild()
     }
     cleanup {
-        sh "make clean || true"
+      sh "make clean || true"
       cleanWs()
     }
   }
