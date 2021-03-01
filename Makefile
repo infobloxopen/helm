@@ -1,9 +1,14 @@
 HELM_VERSION	= $(shell cat VERSION)
 IMAGE_VERSION	= $(HELM_VERSION)-$(shell git describe --always --tags)
 
-default: Dockerfile
+default: build docker-push
+
+build: Dockerfile
 	docker build -t infoblox/helm:$(IMAGE_VERSION) .
+
+docker-push: Dockerfile
 	docker push infoblox/helm:$(IMAGE_VERSION)
+
 
 Dockerfile: Dockerfile.in VERSION
 	sed "s/VERSION/$(HELM_VERSION)/g" Dockerfile.in > .Dockerfile
@@ -11,3 +16,4 @@ Dockerfile: Dockerfile.in VERSION
 
 clean:
 	rm -f Dockerfile .Dockerfile
+
