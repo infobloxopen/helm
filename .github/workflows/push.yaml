@@ -19,12 +19,18 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Checkout repo
+        uses: actions/checkout@v3
       - name: Dockerfile
+        id: version
         run: |
           make Dockerfile
-          echo "IMAGE_VERSION=$(make version) >> $GITHUB_ENV
+          echo 'IMAGE_VERSION<<EOF' >> $GITHUB_OUTPUT
+          make version >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
+          context: .
           push: true
-          tags: infoblox/helm:$IMAGE_VERSION
+          tags: infoblox/helm:${{ steps.version.outputs.IMAGE_VERSION }}
