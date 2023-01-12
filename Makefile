@@ -9,6 +9,8 @@ build: Dockerfile
 docker-push: Dockerfile
 	docker push infoblox/helm:$(IMAGE_VERSION)
 
+version:
+	echo $(IMAGE_VERSION)
 
 Dockerfile: Dockerfile.in VERSION
 	sed "s/VERSION/$(HELM_VERSION)/g" Dockerfile.in > .Dockerfile
@@ -16,4 +18,3 @@ Dockerfile: Dockerfile.in VERSION
 
 clean:
 	rm -f Dockerfile .Dockerfile
-
