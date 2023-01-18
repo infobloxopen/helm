@@ -10,7 +10,7 @@ docker-push: Dockerfile
 	docker push infoblox/helm:$(IMAGE_VERSION)
 
 version:
-	echo $(IMAGE_VERSION)
+	@echo $(IMAGE_VERSION)
 
 Dockerfile: Dockerfile.in VERSION
 	sed "s/VERSION/$(HELM_VERSION)/g" Dockerfile.in > .Dockerfile
