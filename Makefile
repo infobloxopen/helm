@@ -10,7 +10,7 @@ docker-push: Dockerfile
 	docker push infoblox/helm:$(IMAGE_VERSION)
 
 version-major:
-	@echo $(shell echo ${IMAGE_VERSION} | cut -d '.' -f 1)
+	@echo ${IMAGE_VERSION} | cut -d '.' -f 1
 
 version:
 	@echo $(IMAGE_VERSION)
