@@ -14,6 +14,8 @@ RUN apk add --update --no-cache git bash && \
 # Fake a repo when entrypoint is overridden
 ADD repositories.yaml $HELM_HOME/repository/repositories.yaml
 ADD cache.yaml $HELM_HOME/repository/cache/infobloxcto-index.yaml
+RUN chmod a+rw $HELM_HOME/repository/repositories.yaml $HELM_HOME/repository/cache/infobloxcto-index.yaml
+RUN chmod a+rwx $HELM_HOME/repository/ $HELM_HOME/repository/cache/
 
 ADD entrypoint.sh /entrypoint.sh
 
