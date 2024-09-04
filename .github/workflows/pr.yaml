@@ -1,0 +1,16 @@
+name: ci
+
+on:
+  pull_request:
+  merge_group:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - run: |
+          ls
+          make docker-build
+          make test
