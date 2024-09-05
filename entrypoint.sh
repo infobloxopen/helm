@@ -10,7 +10,6 @@ then
     then
         helm repo add infobloxcto s3://infoblox-helm-dev/charts >&2
     fi
-    helm repo update >&2
 fi
 
 exec "$@"
